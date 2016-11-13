@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:01 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/13 14:29:39 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/13 17:24:32 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 # define ERROR -1
 # define OK 0
 
+# define ERROR_OPTION "ft_ls : option non valide -- "
+
 typedef char	t_bool;
+
+# include <stdio.h>
+# include <errno.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 /*
 **	Structure
@@ -37,7 +44,7 @@ typedef struct	s_flags
 **	Functions
 */
 
-t_flags		ft_init_flags(t_flags **flags, int ac, char **av);
-
+int			ft_init_flags(t_flags **flags, int ac, char **av);
+int			ft_dirORP(char *name, t_flags *flags);
 
 #endif

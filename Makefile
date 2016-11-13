@@ -6,13 +6,14 @@
 #    By: jcarra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/13 12:28:37 by jcarra            #+#    #+#              #
-#    Updated: 2016/11/13 14:24:18 by jcarra           ###   ########.fr        #
+#    Updated: 2016/11/13 17:24:57 by jcarra           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	ft_ls
 
-SRC			=	ft_flags.c \
+SRC			=	ft_dir.c \
+				ft_flags.c \
 				ft_main.c
 
 LIB			=	libft.a
