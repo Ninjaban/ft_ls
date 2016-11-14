@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 09:05:51 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 16:21:01 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 21:29:25 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char			*ft_getTime(char *path, char *name)
 	struct stat	*buf;
 	char		*tmp;
 
-	if ((tmp = ft_setPATH(path, name)) == NULL)
+	if ((tmp = ft_setPATH(path, name, FALSE)) == NULL)
 		return (NULL);
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
 		return (NULL);
@@ -93,6 +93,7 @@ int				ft_isdir(const char *path)
 int				ft_stat(const char *path, char *name)
 {
 	struct stat	*buf;
+	t_stat		*stats;
 
 	if (!path)
 		return (ERROR);
@@ -100,7 +101,10 @@ int				ft_stat(const char *path, char *name)
 		return (ERROR);
 	if (stat(path, buf) == -1)
 		return (ERROR);
-	ft_init_stat(name, buf);
+	stats = ft_init_stat(name, buf);
+
+	ft_free_stat(stats);
+
 	free(buf);
 	free((void *)path);
 	return (OK);

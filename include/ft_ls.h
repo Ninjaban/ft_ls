@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:01 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 16:26:45 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 21:28:26 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,13 @@ typedef struct	s_stat
 void		ft_sort_alpha(char ***tab);
 void		ft_sort_revalpha(char ***tab);
 void		ft_sort_time(char *name, char ***tab);
+void		ft_free_stat(t_stat *stats);
 int			ft_isdir(const char *path);
 int			ft_stat(const char *path, char *name);
 int			ft_init_flags(t_flags **flags, int ac, char **av);
 int			ft_dirORP(char *name, t_flags *flags, t_params *params);
-char		*ft_setPATH(char *path, char *name);
+char		*ft_setPATH(char *path, char *name, int clean);
 char		*ft_getTime(char *path, char *name);
 t_stat		*ft_init_stat(char *name, struct stat *buf);
 
 #endif
-
-
-
-

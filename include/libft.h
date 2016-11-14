@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 13:23:35 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/07 08:54:54 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 21:34:34 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_list
 **	Part 1
 */
 
+void				ft_free_tab(char **tab);
 void				ft_bzero(void *str, size_t n);
 void				*ft_memchr(const void *str, int c, size_t n);
 void				*ft_memccpy(void *str, const void *srcs, int c, size_t n);

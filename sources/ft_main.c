@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:19 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 13:35:40 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 21:30:37 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,11 @@ static int		ft_init_params(t_params **params, int ac, char **av)
 	return (OK);
 }
 
-int				main(int ac, char **av)
+static void		ft_launch(int ac, char **av, t_flags *flags, t_params *params)
 {
-	t_flags		*flags;
-	t_params	*params;
+	char		*str;
 	int			n;
 
-	n = 1;
-	if ((flags = malloc(sizeof(t_flags))) == NULL)
-		return (1);
-	if ((params = malloc(sizeof(t_params))) == NULL)
-		return (1);
-	if (ft_init_flags(&flags, ac, av) == ERROR)
-		return (1);
-	if (ft_init_params(&params, ac, av) == ERROR)
-		return (1);
 	if (ac == 1 || params->nb == 1)
 		ft_dirORP(ft_strjoin(".", ""), flags, params);
 	else
@@ -55,10 +45,27 @@ int				main(int ac, char **av)
 		while (++n < ac)
 			if (av[n][0] != '-')
 			{
-				ft_dirORP(ft_setPATH("./", av[n]), flags, params);
+				str = ft_strdup(av[n]);
+				ft_dirORP(ft_setPATH("./", str, TRUE), flags, params);
 				params->nb++;
 			}
 	}
+}
+
+int				main(int ac, char **av)
+{
+	t_flags		*flags;
+	t_params	*params;
+
+	if ((flags = malloc(sizeof(t_flags))) == NULL)
+		return (1);
+	if ((params = malloc(sizeof(t_params))) == NULL)
+		return (1);
+	if (ft_init_flags(&flags, ac, av) == ERROR)
+		return (1);
+	if (ft_init_params(&params, ac, av) == ERROR)
+		return (1);
+	ft_launch(ac, av, flags, params);
 	ft_putchar('\n');
 	free(flags);
 	free(params);

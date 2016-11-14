@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 16:43:59 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 16:23:52 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 21:33:13 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char			*ft_savename(char *str, struct dirent *files)
 	return (str);
 }
 
-char			*ft_setPATH(char *path, char *name)
+char			*ft_setPATH(char *path, char *name, int clean)
 {
 	char			*new;
 	int				n;
@@ -48,6 +48,8 @@ char			*ft_setPATH(char *path, char *name)
 	while (name[n])
 		new[i++] = name[n++];
 	new[i] = '\0';
+	if (clean == TRUE)
+		free(name);
 	return (new);
 }
 
@@ -55,27 +57,28 @@ static void			ft_print_aff(char *name, char **tab, t_flags *flags, t_params *par
 {
 	int				n;
 
-	n = 0;
-	while (tab[n])
-	{
-		ft_putstr(tab[n++]);
-		if (tab[n])
-			ft_putchar(' ');
-	}
-	n = 0;
-	while (tab[n])
-	{
-		if (flags->R == TRUE && ft_isdir(ft_setPATH(name, tab[n])) == TRUE &&
+	n = -1;
+	while (tab[++n])
+		if (flags->l == TRUE)
+		{
+			if (ft_stat(ft_setPATH(name, tab[n], FALSE), tab[n]) == ERROR)
+				return ;
+		}
+		else
+		{
+			ft_putstr(tab[n]);
+			if (tab[n])
+				ft_putchar(' ');
+		}
+	n = -1;
+	while (tab[++n])
+		if (flags->R == TRUE && ft_isdir(ft_setPATH(name, tab[n], FALSE)) == TRUE &&
 			ft_strcmp(".", tab[n]) != 0 && ft_strcmp("..", tab[n]) != 0)
 		{
 			params->nb++;
-			ft_dirORP(ft_setPATH(name, tab[n]), flags, params);
+			ft_dirORP(ft_setPATH(name, tab[n], FALSE), flags, params);
 		}
-		if (flags->l == TRUE)
-			if (ft_stat(ft_setPATH(name, tab[n]), tab[n]) == ERROR)
-				return ;
-		n = n + 1;
-	}
+	ft_free_tab(tab);
 }
 
 static void			ft_print_init(char *name, char *str, t_flags *flags, t_params *params)
@@ -91,6 +94,7 @@ static void			ft_print_init(char *name, char *str, t_flags *flags, t_params *par
 	}
 	if ((tab = ft_strsplit(str, '|')) == NULL)
 		return ;
+	free(str);
 	if (flags->t == FALSE)
 		ft_sort_alpha(&tab);
 	if (flags->t == TRUE)
@@ -122,5 +126,6 @@ int					ft_dirORP(char *name, t_flags *flags, t_params *params)
 				return (ERROR);
 	closedir(dir);
 	ft_print_init(name, str, flags, params);
+	free(name);
 	return (OK);
 }
