@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:01 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 14:33:22 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 16:26:45 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef char	t_bool;
 # include <sys/stat.h>
 # include <dirent.h>
 # include <time.h>
+# include <pwd.h>
+# include <grp.h>
 
 /*
 **	Structure
@@ -49,6 +51,17 @@ typedef struct	s_params
 	size_t		base_nb;
 }				t_params;
 
+typedef struct	s_stat
+{
+	char		*name;
+	char		*perms;
+	char		*user;
+	char		*group;
+	char		*time;
+	size_t		links;
+	size_t		octets;
+}				t_stat;
+
 /*
 **	Functions
 */
@@ -57,10 +70,15 @@ void		ft_sort_alpha(char ***tab);
 void		ft_sort_revalpha(char ***tab);
 void		ft_sort_time(char *name, char ***tab);
 int			ft_isdir(const char *path);
-int			ft_stat(const char *path);
+int			ft_stat(const char *path, char *name);
 int			ft_init_flags(t_flags **flags, int ac, char **av);
 int			ft_dirORP(char *name, t_flags *flags, t_params *params);
 char		*ft_setPATH(char *path, char *name);
 char		*ft_getTime(char *path, char *name);
+t_stat		*ft_init_stat(char *name, struct stat *buf);
 
 #endif
+
+
+
+

@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 09:05:51 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 15:20:23 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 16:21:01 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,32 +90,17 @@ int				ft_isdir(const char *path)
 	return (FALSE);
 }
 
-int				ft_stat(const char *path)
+int				ft_stat(const char *path, char *name)
 {
 	struct stat	*buf;
 
 	if (!path)
 		return (ERROR);
-	ft_putendl((char *)path);
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
 		return (ERROR);
 	if (stat(path, buf) == -1)
 		return (ERROR);
-	ft_putstr("type de fichier : ");
-	if (S_ISREG(buf->st_mode))
-		ft_putendl("FICHIER");
-	if (S_ISDIR(buf->st_mode))
-		ft_putendl("DOSSIER");
-	if (S_ISCHR(buf->st_mode))
-		ft_putendl("PERIPHERIQUE EN MODE CHAR");
-	if (S_ISBLK(buf->st_mode))
-		ft_putendl("PERIPHERIQUE EN MODE BLOCK");
-	if (S_ISFIFO(buf->st_mode))
-		ft_putendl("FIFO");
-	if (S_ISLNK(buf->st_mode))
-		ft_putendl("LIEN SYMBOLIQUE");
-	if (S_ISSOCK(buf->st_mode))
-		ft_putendl("SOCKET");
+	ft_init_stat(name, buf);
 	free(buf);
 	free((void *)path);
 	return (OK);

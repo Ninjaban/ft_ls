@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 16:43:59 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 15:49:49 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/14 16:23:52 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void			ft_print_aff(char *name, char **tab, t_flags *flags, t_params *par
 			ft_dirORP(ft_setPATH(name, tab[n]), flags, params);
 		}
 		if (flags->l == TRUE)
-			if (ft_stat(ft_setPATH(name, tab[n])) == ERROR)
+			if (ft_stat(ft_setPATH(name, tab[n]), tab[n]) == ERROR)
 				return ;
 		n = n + 1;
 	}
