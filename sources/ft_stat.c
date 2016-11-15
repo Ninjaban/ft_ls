@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 09:05:51 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 21:29:25 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/15 11:58:40 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ static void		ft_ctime_int(char **str)
 	ft_change(&(*str), "Dec\0", "12", n);
 }
 
-char			*ft_getTime(char *path, char *name)
+char			*ft_gettime(char *path, char *name)
 {
 	struct stat	*buf;
 	char		*tmp;
 
-	if ((tmp = ft_setPATH(path, name, FALSE)) == NULL)
+	if ((tmp = ft_setpath(path, name, FALSE)) == NULL)
 		return (NULL);
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
 		return (NULL);
@@ -90,22 +90,19 @@ int				ft_isdir(const char *path)
 	return (FALSE);
 }
 
-int				ft_stat(const char *path, char *name)
+t_stat			*ft_stat(const char *path, char *name)
 {
 	struct stat	*buf;
 	t_stat		*stats;
 
 	if (!path)
-		return (ERROR);
+		return (NULL);
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
-		return (ERROR);
+		return (NULL);
 	if (stat(path, buf) == -1)
-		return (ERROR);
+		return (NULL);
 	stats = ft_init_stat(name, buf);
-
-	ft_free_stat(stats);
-
 	free(buf);
 	free((void *)path);
-	return (OK);
+	return (stats);
 }

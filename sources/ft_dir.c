@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 16:43:59 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 21:33:13 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/15 12:00:06 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char			*ft_savename(char *str, struct dirent *files)
 	return (str);
 }
 
-char			*ft_setPATH(char *path, char *name, int clean)
+char				*ft_setpath(char *path, char *name, int clean)
 {
 	char			*new;
 	int				n;
@@ -36,7 +36,8 @@ char			*ft_setPATH(char *path, char *name, int clean)
 
 	n = 0;
 	i = 0;
-	if ((ft_strcmp("./", name) == 0 || ft_strcmp(".", name) == 0) || name[0] == '/')
+	if ((ft_strcmp("./", name) == 0 || ft_strcmp(".", name) == 0)
+		|| name[0] == '/')
 		return (name);
 	if ((new = malloc(ft_strlen(path) + ft_strlen(name) + 2)) == NULL)
 		return (NULL);
@@ -53,58 +54,7 @@ char			*ft_setPATH(char *path, char *name, int clean)
 	return (new);
 }
 
-static void			ft_print_aff(char *name, char **tab, t_flags *flags, t_params *params)
-{
-	int				n;
-
-	n = -1;
-	while (tab[++n])
-		if (flags->l == TRUE)
-		{
-			if (ft_stat(ft_setPATH(name, tab[n], FALSE), tab[n]) == ERROR)
-				return ;
-		}
-		else
-		{
-			ft_putstr(tab[n]);
-			if (tab[n])
-				ft_putchar(' ');
-		}
-	n = -1;
-	while (tab[++n])
-		if (flags->R == TRUE && ft_isdir(ft_setPATH(name, tab[n], FALSE)) == TRUE &&
-			ft_strcmp(".", tab[n]) != 0 && ft_strcmp("..", tab[n]) != 0)
-		{
-			params->nb++;
-			ft_dirORP(ft_setPATH(name, tab[n], FALSE), flags, params);
-		}
-	ft_free_tab(tab);
-}
-
-static void			ft_print_init(char *name, char *str, t_flags *flags, t_params *params)
-{
-	char			**tab;
-
-	if (params->nb != params->base_nb)
-		ft_putstr("\n\n");
-	if (params->nb > 1)
-	{
-		ft_putstr(name);
-		ft_putendl(":");
-	}
-	if ((tab = ft_strsplit(str, '|')) == NULL)
-		return ;
-	free(str);
-	if (flags->t == FALSE)
-		ft_sort_alpha(&tab);
-	if (flags->t == TRUE)
-		ft_sort_time(name, &tab);
-	if (flags->r == TRUE)
-		ft_sort_revalpha(&tab);
-	ft_print_aff(name, tab, flags, params);
-}
-
-int					ft_dirORP(char *name, t_flags *flags, t_params *params)
+int					ft_dirorp(char *name, t_flags *flags, t_params *params)
 {
 	DIR				*dir;
 	struct dirent	*files;

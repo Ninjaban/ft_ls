@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:51:45 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/13 16:30:59 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/15 11:54:05 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_find_flags(t_flags **flags, char *str)
 		if (str[n] == 'l')
 			(*flags)->l = TRUE;
 		else if (str[n] == 'R')
-			(*flags)->R = TRUE;
+			(*flags)->rec = TRUE;
 		else if (str[n] == 'a')
 			(*flags)->a = TRUE;
 		else if (str[n] == 'r')
@@ -48,7 +48,7 @@ int			ft_init_flags(t_flags **flags, int ac, char **av)
 
 	n = 0;
 	(*flags)->l = FALSE;
-	(*flags)->R = FALSE;
+	(*flags)->rec = FALSE;
 	(*flags)->a = FALSE;
 	(*flags)->r = FALSE;
 	(*flags)->t = FALSE;

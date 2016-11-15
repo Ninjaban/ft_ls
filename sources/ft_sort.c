@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:32:23 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 15:45:52 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/15 11:57:11 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void		ft_sort_time(char *name, char ***tab)
 		return ;
 	while ((*tab)[++n])
 	{
-		tmp1 = ft_strcpy(tmp1, ft_getTime(name, (*tab)[n]));
-		tmp2 = ft_getTime(name, (*tab)[n + 1]);
+		tmp1 = ft_strcpy(tmp1, ft_gettime(name, (*tab)[n]));
+		tmp2 = ft_gettime(name, (*tab)[n + 1]);
 		if ((*tab)[n + 1] && ft_strcmp(tmp1, tmp2) < 0)
 		{
 			ft_swap(&((*tab)[n]), &((*tab)[n + 1]));
@@ -70,16 +70,3 @@ void		ft_sort_time(char *name, char ***tab)
 	}
 	free(tmp1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

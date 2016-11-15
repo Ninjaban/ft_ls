@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:19 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 21:30:37 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/15 12:11:58 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static int		ft_init_params(t_params **params, int ac, char **av)
 			(*params)->nb++;
 		n = n + 1;
 	}
-	if ((*params)->nb == 0)
-		(*params)->nb = 1;
 	(*params)->base_nb = (*params)->nb;
 	return (OK);
 }
@@ -37,8 +35,8 @@ static void		ft_launch(int ac, char **av, t_flags *flags, t_params *params)
 	char		*str;
 	int			n;
 
-	if (ac == 1 || params->nb == 1)
-		ft_dirORP(ft_strjoin(".", ""), flags, params);
+	if (ac == 1 || params->nb == 0)
+		ft_dirorp(ft_strjoin(".", ""), flags, params);
 	else
 	{
 		n = 0;
@@ -46,7 +44,7 @@ static void		ft_launch(int ac, char **av, t_flags *flags, t_params *params)
 			if (av[n][0] != '-')
 			{
 				str = ft_strdup(av[n]);
-				ft_dirORP(ft_setPATH("./", str, TRUE), flags, params);
+				ft_dirorp(ft_setpath("./", str, TRUE), flags, params);
 				params->nb++;
 			}
 	}

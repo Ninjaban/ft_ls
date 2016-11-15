@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:01 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 21:28:26 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/15 11:53:47 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 # define ERROR_OPTION "ft_ls : option non valide -- "
 
-typedef char	t_bool;
-
 # include <stdio.h>
 # include <errno.h>
 # include <sys/types.h>
@@ -31,6 +29,8 @@ typedef char	t_bool;
 # include <pwd.h>
 # include <grp.h>
 
+typedef char	t_bool;
+
 /*
 **	Structure
 */
@@ -38,7 +38,7 @@ typedef char	t_bool;
 typedef struct	s_flags
 {
 	t_bool		l;
-	t_bool		R;
+	t_bool		rec;
 	t_bool		a;
 	t_bool		r;
 	t_bool		t;
@@ -60,22 +60,29 @@ typedef struct	s_stat
 	char		*time;
 	size_t		links;
 	size_t		octets;
+	size_t		block;
 }				t_stat;
 
 /*
 **	Functions
 */
 
-void		ft_sort_alpha(char ***tab);
-void		ft_sort_revalpha(char ***tab);
-void		ft_sort_time(char *name, char ***tab);
-void		ft_free_stat(t_stat *stats);
-int			ft_isdir(const char *path);
-int			ft_stat(const char *path, char *name);
-int			ft_init_flags(t_flags **flags, int ac, char **av);
-int			ft_dirORP(char *name, t_flags *flags, t_params *params);
-char		*ft_setPATH(char *path, char *name, int clean);
-char		*ft_getTime(char *path, char *name);
-t_stat		*ft_init_stat(char *name, struct stat *buf);
+void			ft_sort_alpha(char ***tab);
+void			ft_sort_revalpha(char ***tab);
+void			ft_sort_time(char *name, char ***tab);
+void			ft_free_stat(t_stat *stats);
+void			ft_print_init(char *name, char *str,
+							t_flags *flags, t_params *params);
+void			ft_print_char(char c, size_t n);
+int				ft_isdir(const char *path);
+int				ft_init_flags(t_flags **flags, int ac, char **av);
+int				ft_dirorp(char *name, t_flags *flags, t_params *params);
+size_t			ft_getnbdigit(size_t nbr);
+size_t			ft_max_int(t_stat **stats, int in);
+size_t			ft_max_length(t_stat **stats, int in);
+char			*ft_setpath(char *path, char *name, int clean);
+char			*ft_gettime(char *path, char *name);
+t_stat			*ft_init_stat(char *name, struct stat *buf);
+t_stat			*ft_stat(const char *path, char *name);
 
 #endif
