@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 08:55:57 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/15 12:23:28 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/19 11:59:27 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ static void			ft_print_aff(char *name, char **tab,
 		while (tab[++n])
 		{
 			ft_putstr(tab[n]);
-			if (tab[n])
-				ft_putchar(' ');
+			if (tab[n + 1])
+				ft_putchar('\n');
 		}
 	n = -1;
 	while (tab[++n])
