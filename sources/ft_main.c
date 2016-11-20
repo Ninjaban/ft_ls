@@ -60,9 +60,17 @@ int				main(int ac, char **av)
 	if ((params = malloc(sizeof(t_params))) == NULL)
 		return (1);
 	if (ft_init_flags(&flags, ac, av) == ERROR)
+	  {
+	    free(flags);
+	    free(params);
 		return (1);
+	  }
 	if (ft_init_params(&params, ac, av) == ERROR)
+	  {
+	    free(flags);
+	    free(params);
 		return (1);
+	  }
 	ft_launch(ac, av, flags, params);
 	ft_putchar('\n');
 	free(flags);

@@ -83,10 +83,17 @@ int				ft_isdir(const char *path)
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
 		return (ERROR);
 	if (stat(path, buf) == -1)
+	  {
+	    free(buf);
 		return (ERROR);
+	  }
 	free((void *)path);
 	if (S_ISDIR(buf->st_mode))
+	  {
+	    free(buf);
 		return (TRUE);
+	  }
+	free(buf);
 	return (FALSE);
 }
 

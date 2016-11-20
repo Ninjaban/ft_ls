@@ -56,17 +56,16 @@ void		ft_sort_time(char *name, char ***tab)
 	char	*tmp2;
 
 	n = -1;
-	if ((tmp1 = malloc(24)) == NULL)
-		return ;
 	while ((*tab)[++n])
 	{
-		tmp1 = ft_strcpy(tmp1, ft_gettime(name, (*tab)[n]));
+		tmp1 = ft_strdup(ft_gettime(name, (*tab)[n]));
 		tmp2 = ft_gettime(name, (*tab)[n + 1]);
 		if ((*tab)[n + 1] && ft_strcmp(tmp1, tmp2) < 0)
 		{
 			ft_swap(&((*tab)[n]), &((*tab)[n + 1]));
 			n = -1;
 		}
+		if (tmp1)
+		  free(tmp1);
 	}
-	free(tmp1);
 }
