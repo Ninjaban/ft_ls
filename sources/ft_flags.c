@@ -6,18 +6,15 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:51:45 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/15 11:54:05 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 11:14:47 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_ls.h"
 
-static int	ft_find_flags(t_flags **flags, char *str)
+static int	ft_find_flags(t_flags **flags, char *str, int n)
 {
-	int		n;
-
-	n = 0;
 	if (str[0] != '-' || str[1] == '-')
 		return (OK);
 	while (str[++n])
@@ -36,6 +33,7 @@ static int	ft_find_flags(t_flags **flags, char *str)
 		{
 			ft_putstr(ERROR_OPTION);
 			ft_putendl(&str[n]);
+			ft_putendl(ERROR_USAGE);
 			return (ERROR);
 		}
 	}
@@ -53,7 +51,7 @@ int			ft_init_flags(t_flags **flags, int ac, char **av)
 	(*flags)->r = FALSE;
 	(*flags)->t = FALSE;
 	while (++n < ac)
-		if (ft_find_flags(&(*flags), av[n]) == ERROR)
+		if (ft_find_flags(&(*flags), av[n], 0) == ERROR)
 			return (ERROR);
 	return (OK);
 }

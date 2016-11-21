@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:01 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/15 11:53:47 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 10:24:03 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define ERROR -1
 # define OK 0
 
-# define ERROR_OPTION "ft_ls : option non valide -- "
+# define ERROR_OPTION "ft_ls : illegal option -- "
+# define ERROR_USAGE "usage: ft_ls [-Ralrt] [file ...]"
 
 # include <stdio.h>
 # include <errno.h>

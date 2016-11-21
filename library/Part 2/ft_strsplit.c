@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 09:04:45 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/14 21:31:55 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 11:21:02 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void		ft_free_tab(char **tab)
 
 	n = 0;
 	while (tab[n])
-		free(tab[n++]);
+	{
+		free(tab[n]);
+		tab[n++] = NULL;
+	}
 	free(tab);
+	tab = NULL;
 }
 
 static int	count_word(char const *s, char c)

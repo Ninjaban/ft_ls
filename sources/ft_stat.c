@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 09:05:51 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/15 11:58:40 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 11:31:53 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ int				ft_isdir(const char *path)
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
 		return (ERROR);
 	if (stat(path, buf) == -1)
-	  {
-	    free(buf);
+	{
+		free(buf);
 		return (ERROR);
-	  }
+	}
 	free((void *)path);
 	if (S_ISDIR(buf->st_mode))
-	  {
-	    free(buf);
+	{
+		free(buf);
 		return (TRUE);
-	  }
+	}
 	free(buf);
 	return (FALSE);
 }
@@ -101,14 +101,25 @@ t_stat			*ft_stat(const char *path, char *name)
 {
 	struct stat	*buf;
 	t_stat		*stats;
+	int			ret;
+	char		*lnk;
 
 	if (!path)
 		return (NULL);
 	if ((buf = malloc(sizeof(struct stat))) == NULL)
 		return (NULL);
-	if (stat(path, buf) == -1)
+	if ((lnk = malloc(1024)) == NULL)
+		return (NULL);
+	if (lstat(path, buf) == -1)
 		return (NULL);
 	stats = ft_init_stat(name, buf);
+	if ((ret = readlink(path, lnk, 1023)) != -1)
+	{
+		stats->perms[0] = 'l';
+		lnk[ret] = '\0';
+		stats->name = ft_strjoin(stats->name, ft_strjoin(" -> ", lnk));
+	}
+	free(lnk);
 	free(buf);
 	free((void *)path);
 	return (stats);

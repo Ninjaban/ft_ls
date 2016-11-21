@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 16:12:28 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/19 12:05:44 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 11:41:08 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	ft_setperms(char **str, struct stat *buf)
 {
 	if (S_ISDIR(buf->st_mode))
 		(*str)[0] = 'd';
-	if (S_ISLNK(buf->st_mode))
-		(*str)[0] = 'l';
 	(*str)[1] = (buf->st_mode & S_IRUSR) ? 'r' : '-';
 	(*str)[2] = (buf->st_mode & S_IWUSR) ? 'w' : '-';
 	(*str)[3] = (buf->st_mode & S_IXUSR) ? 'x' : '-';
