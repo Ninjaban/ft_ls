@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 09:05:51 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/21 11:31:53 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 18:49:17 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int				ft_isdir(const char *path)
 	return (FALSE);
 }
 
-t_stat			*ft_stat(const char *path, char *name)
+t_stat			*ft_stat(char *path, char *name)
 {
 	struct stat	*buf;
 	t_stat		*stats;
@@ -116,11 +116,10 @@ t_stat			*ft_stat(const char *path, char *name)
 	if ((ret = readlink(path, lnk, 1023)) != -1)
 	{
 		stats->perms[0] = 'l';
-		lnk[ret] = '\0';
-		stats->name = ft_strjoin(stats->name, ft_strjoin(" -> ", lnk));
+		stats->name = ft_lnk(name, lnk, ret);
 	}
 	free(lnk);
 	free(buf);
-	free((void *)path);
+	free(path);
 	return (stats);
 }

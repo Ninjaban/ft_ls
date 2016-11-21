@@ -6,13 +6,14 @@
 #    By: jcarra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/13 12:28:37 by jcarra            #+#    #+#              #
-#    Updated: 2016/11/19 11:53:35 by jcarra           ###   ########.fr        #
+#    Updated: 2016/11/21 18:30:56 by jcarra           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	ft_ls
 
-SRC			=	ft_tools.c \
+SRC			=	ft_lnk.c \
+				ft_tools.c \
 				ft_display.c \
 				ft_statl.c \
 				ft_sort.c \

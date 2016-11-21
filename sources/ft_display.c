@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 08:55:57 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/21 11:33:11 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 18:50:28 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,13 @@ static void			ft_print_aff(char *name, char **tab,
 			params->nb++;
 			ft_dirorp(ft_setpath(name, tab[n], FALSE), flags, params);
 		}
+	n = 0;
+	while (tab[n])
+	{
+		ft_putendl(tab[n]);
+		free(tab[n++]);
+	}
+	free(tab);
 //	ft_free_tab(tab);
 }
 

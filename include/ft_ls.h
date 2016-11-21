@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 12:32:01 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/21 10:24:03 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 18:30:40 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ size_t			ft_max_int(t_stat **stats, int in);
 size_t			ft_max_length(t_stat **stats, int in);
 char			*ft_setpath(char *path, char *name, int clean);
 char			*ft_gettime(char *path, char *name);
+char			*ft_lnk(char *name, char *lnk, int ret);
 t_stat			*ft_init_stat(char *name, struct stat *buf);
-t_stat			*ft_stat(const char *path, char *name);
+t_stat			*ft_stat(char *path, char *name);
 
 #endif

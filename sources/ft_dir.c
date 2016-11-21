@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 16:43:59 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/15 12:00:06 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/21 18:43:07 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char				*ft_setpath(char *path, char *name, int clean)
 	i = 0;
 	if ((ft_strcmp("./", name) == 0 || ft_strcmp(".", name) == 0)
 		|| name[0] == '/')
-		return (name);
+		return (ft_strdup(name));
 	if ((new = malloc(ft_strlen(path) + ft_strlen(name) + 2)) == NULL)
 		return (NULL);
 	while (path[n])
