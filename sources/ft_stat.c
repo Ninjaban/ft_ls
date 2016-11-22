@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 09:05:51 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/21 18:49:17 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/22 12:51:25 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,9 @@ t_stat			*ft_stat(char *path, char *name)
 		return (NULL);
 	stats = ft_init_stat(name, buf);
 	if ((ret = readlink(path, lnk, 1023)) != -1)
-	{
-		stats->perms[0] = 'l';
-		stats->name = ft_lnk(name, lnk, ret);
-	}
+		ft_lnk(&stats, name, lnk, ret);
+	else
+		free(name);
 	free(lnk);
 	free(buf);
 	free(path);

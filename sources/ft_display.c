@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 08:55:57 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/21 18:50:28 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/22 12:29:59 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void			ft_print_stat_init(char *name, char **tab, size_t total)
 	n = -1;
 	while (tab[++n])
 		if ((stats[n] = ft_stat(ft_setpath(name, tab[n], FALSE),
-								tab[n])) == NULL)
+								ft_strdup(tab[n]))) == NULL)
 			return ;
 	n = -1;
 	while (stats[++n])
@@ -101,14 +101,7 @@ static void			ft_print_aff(char *name, char **tab,
 			params->nb++;
 			ft_dirorp(ft_setpath(name, tab[n], FALSE), flags, params);
 		}
-	n = 0;
-	while (tab[n])
-	{
-		ft_putendl(tab[n]);
-		free(tab[n++]);
-	}
-	free(tab);
-//	ft_free_tab(tab);
+	ft_free_tab(tab);
 }
 
 void				ft_print_init(char *name, char *str,

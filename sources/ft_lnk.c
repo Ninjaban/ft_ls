@@ -6,14 +6,14 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 18:30:08 by jcarra            #+#    #+#             */
-/*   Updated: 2016/11/21 18:30:29 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/11/22 12:33:50 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_ls.h"
 
-char			*ft_lnk(char *name, char *lnk, int ret)
+void			ft_lnk(t_stat **stats, char *name, char *lnk, int ret)
 {
 	char		*tmp;
 
@@ -22,5 +22,6 @@ char			*ft_lnk(char *name, char *lnk, int ret)
 	free(name);
 	name = ft_strjoin(tmp, lnk);
 	free(tmp);
-	return (name);
+	(*stats)->perms[0] = 'l';
+	(*stats)->name = name;
 }
